@@ -22,10 +22,10 @@ pipeline {
 
         stage('Checkout & Setup') {
             steps {
-                // Étape 1 : Clone automatique par Jenkins, ici on récupère juste le JAR
                 sh '''
                     if [ ! -f junit-platform-console-standalone-1.9.3.jar ]; then
-                        wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.3/junit-platform-console-standalone-1.9.3.jar
+                        echo "Téléchargement de JUnit avec curl..."
+                        curl -L -o junit-platform-console-standalone-1.9.3.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.3/junit-platform-console-standalone-1.9.3.jar
                     fi
                 '''
             }
