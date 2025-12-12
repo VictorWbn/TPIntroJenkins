@@ -1,0 +1,73 @@
+Started by user admin
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/JavaGitInterro
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/JavaGitInterro/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/VictorWbn/TPIntroJenkins.git # timeout=10
+Fetching upstream changes from https://github.com/VictorWbn/TPIntroJenkins.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/VictorWbn/TPIntroJenkins.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/main
+Seen 1 remote branch
+ > git show-ref --tags -d # timeout=10
+Checking out Revision 1323587d40725a2710a62d48f539b74db91f6848 (origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1323587d40725a2710a62d48f539b74db91f6848 # timeout=10
+Commit message: "update"
+First time build. Skipping changelog.
+[JavaGitInterro] $ /bin/sh -xe /tmp/jenkins11716176876840383091.sh
++ echo Environnement sélectionné : main
+Environnement sélectionné : main
++ JUNIT_JAR=junit-platform-console-standalone-1.9.3.jar
++ [ ! -f junit-platform-console-standalone-1.9.3.jar ]
++ echo --- Compilation ---
+--- Compilation ---
++ mkdir -p out
++ javac -d out -cp junit-platform-console-standalone-1.9.3.jar:. Factorial.java FactorialTest.java
++ [ 0 -ne 0 ]
++ echo --- Tests Unitaires ---
+--- Tests Unitaires ---
++ java -jar junit-platform-console-standalone-1.9.3.jar -cp out --scan-classpath
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+[36m╷[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mFactorialTest[0m [32m✔[0m
+[36m│     └─[0m [34mtestFactorial()[0m [32m✔[0m
+[36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
+[36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+
+Test run finished after 85 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         1 tests found           ]
+[         0 tests skipped         ]
+[         1 tests started         ]
+[         0 tests aborted         ]
+[         1 tests successful      ]
+[         0 tests failed          ]
+
++ [ 0 -ne 0 ]
++ echo --- Packaging (.jar) ---
+--- Packaging (.jar) ---
++ echo Main-Class: Factorial
++ jar cfm factorial-app.jar Manifest.txt -C out .
++ echo Fichier factorial-app.jar généré avec succès.
+Fichier factorial-app.jar généré avec succès.
++ echo --- Déploiement Conditionnel ---
+--- Déploiement Conditionnel ---
++ [ main = prod ]
++ [ main = test ]
++ echo >>> Environnement de DEV : Pas d'action supplémentaire.
+>>> Environnement de DEV : Pas d'action supplémentaire.
++ echo FIN
+FIN
+Finished: SUCCESS
