@@ -1,0 +1,118 @@
+Started by user admin
+Checking out git https://github.com/VictorWbn/TPIntroJenkins.git/ into /var/jenkins_home/workspace/PipelineIE@script/fe15c4b9f60fad93c6120281531f85d6452c1f3bc1427af77c1efb0a45444fd3 to read Jenkinsfile
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/PipelineIE@script/fe15c4b9f60fad93c6120281531f85d6452c1f3bc1427af77c1efb0a45444fd3/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/VictorWbn/TPIntroJenkins.git/ # timeout=10
+Fetching upstream changes from https://github.com/VictorWbn/TPIntroJenkins.git/
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/VictorWbn/TPIntroJenkins.git/ +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision be85d3c9494baf3ce8ee6215ddc446360a59e56e (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f be85d3c9494baf3ce8ee6215ddc446360a59e56e # timeout=10
+Commit message: "update"
+ > git rev-list --no-walk 8a471a8994a566abfb16f4acad58361cd06317a0 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/PipelineIE
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/VictorWbn/TPIntroJenkins.git/
+ > git init /var/jenkins_home/workspace/PipelineIE # timeout=10
+Fetching upstream changes from https://github.com/VictorWbn/TPIntroJenkins.git/
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/VictorWbn/TPIntroJenkins.git/ +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/VictorWbn/TPIntroJenkins.git/ # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision be85d3c9494baf3ce8ee6215ddc446360a59e56e (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f be85d3c9494baf3ce8ee6215ddc446360a59e56e # timeout=10
+Commit message: "update"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout & Setup)
+[Pipeline] sh
++ [ ! -f junit-platform-console-standalone-1.9.3.jar ]
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Compilation)
+[Pipeline] sh
++ mkdir -p out
+[Pipeline] sh
++ javac -d out -cp junit-platform-console-standalone-1.9.3.jar:. Factorial.java FactorialTest.java
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Tests Unitaires)
+[Pipeline] sh
++ java -jar junit-platform-console-standalone-1.9.3.jar -cp out --scan-classpath
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+[36m╷[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mFactorialTest[0m [32m✔[0m
+[36m│     └─[0m [34mtestFactorial()[0m [32m✔[0m
+[36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
+[36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+
+Test run finished after 80 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         1 tests found           ]
+[         0 tests skipped         ]
+[         1 tests started         ]
+[         0 tests aborted         ]
+[         1 tests successful      ]
+[         0 tests failed          ]
+
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Packaging)
+[Pipeline] sh
++ echo Main-Class: Factorial
+[Pipeline] sh
++ jar cfm factorial-app.jar Manifest.txt -C out .
+[Pipeline] archiveArtifacts
+Archiving artifacts
+Recording fingerprints
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Déploiement Prod)
+Stage "Déploiement Prod" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Le pipeline est terminé.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
