@@ -12,14 +12,6 @@ pipeline {
     }
 
     stages {
-        // Étape 7 (Alternative explicite)
-        stage('Nettoyage Workspace') {
-            steps {
-                cleanWs()
-                echo "Workspace nettoyé."
-            }
-        }
-
         stage('Checkout & Setup') {
             steps {
                 sh '''
